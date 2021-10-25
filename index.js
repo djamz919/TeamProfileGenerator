@@ -2,20 +2,20 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 const generateWebsite = require('./src/page-template.js');
+const Engineer = require('./lib/Engineer');
+const Intern = require('./lib/Intern');
+const Manager = require('./lib/Manager');
 
 // Create an array of questions for the content of the manager
 const managerQuestions = ["What is the team manager's name?", "What is the team manager's id?", "What is the team manager's email?", "What is the team manager's office number?"];
-const engineerQuestions = ["What is your engineer's name?", "What is your engineer's id?", "What is your engineer's email?", "What is your engineer's Github usrename?"];
-const internQuestions = ["What is your intern's name?", "What is your intern's id?", "What is your intern's id?", "What is your intern's school?"];
+const engineerQuestions = ["What is your engineer's name?", "What is your engineer's id?", "What is your engineer's email?", "What is your engineer's Github username?"];
+const internQuestions = ["What is your intern's name?", "What is your intern's id?", "What is your intern's email?", "What is your intern's school?"];
 
 [managerName, managerId, managerEmail, managerOffice] = managerQuestions;
 [engineerName, engineerId, engineerEmail, engineerGithub] = engineerQuestions;
 [internName, internId, internEmail, internSchool] = internQuestions;
 
 const promptManager = teamData => {
-    if(!teamData.manager) {
-        teamData.manager = [];
-    }
     return inquirer.prompt([
         {
             type: 'input',
@@ -77,7 +77,8 @@ const promptManager = teamData => {
         }
     ])
     .then(managerData => {
-        teamData.manager.push(managerData);
+        const managerInput = new Manager(managerData.name, managerData.id, managerData.email, managerData.office);
+        teamData.push(managerInput);
         if(managerData.addMember === 'Engineer'){
             return promptEngineer(teamData);
         } else if(managerData.addMember === 'Intern'){
@@ -90,9 +91,6 @@ const promptManager = teamData => {
 
 
 const promptEngineer = teamData => {
-    if(!teamData.engineer) {
-        teamData.engineer = [];
-    }
     return inquirer.prompt([
         {
             type: 'input',
@@ -154,10 +152,11 @@ const promptEngineer = teamData => {
         }
     ])
     .then(engineerData => {
-        teamData.engineer.push(engineerData);
+        const engineerInput = new Engineer(engineerData.name, engineerData.id, engineerData.email, engineerData.github);
+        teamData.push(engineerInput);
         if(engineerData.addMember === 'Engineer'){
             return promptEngineer(teamData);
-        } else if(managerData.addMember === 'Intern'){
+        } else if(engineerData.addMember === 'Intern'){
             return promptIntern(teamData);
         } else {
             return teamData;
@@ -166,9 +165,6 @@ const promptEngineer = teamData => {
 }
 
 const promptIntern = teamData => {
-    if(!teamData.intern) {
-        teamData.intern = [];
-    }
     return inquirer.prompt([
         {
             type: 'input',
@@ -211,7 +207,7 @@ const promptIntern = teamData => {
         },
         {
             type: 'input',
-            name: 'office',
+            name: 'school',
             message: internSchool,
             validate: schoolInput => {
                 if (schoolInput) {
@@ -230,7 +226,8 @@ const promptIntern = teamData => {
         }
     ])
     .then(internData => {
-        teamData.intern.push(internData);
+        const internInput = new Intern(internData.name, internData.id, internData.email, internData.school);
+        teamData.push(internInput);
         if(internData.addMember === 'Engineer'){
             return promptEngineer(teamData);
         } else if(internData.addMember === 'Intern'){
@@ -258,13 +255,16 @@ function writeToFile(fileName, data) {
 }
 
 function copyFile () {
-    
+
 }
 
+teamData = [];
+
 console.log('Please build your team');
-promptManager()
+promptManager(teamData)
     .then(teamData => {
-        return generateWebsite(teamData)
+        console.log(teamData)
+        return generateWebsite(teamData);
     })
     .then(pageHTML => {
         return writeToFile('./dist/index.html', pageHTML);
