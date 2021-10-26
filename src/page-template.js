@@ -25,7 +25,7 @@ const generateCards = teamData => {
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">ID: ${element.id}</li>
                         <li class="list-group-item">Email: <span><a href="mailto:${element.email}">${element.email}</a></span></li>
-                        <li class="list-group-item">Github: <span><a href="https://github.com/${element.github}">${element.github}</a></span></li>
+                        <li class="list-group-item">Github: <span><a target="_blank" href="https://github.com/${element.github}">${element.github}</a></span></li>
                     </ul>
                 </div>
             `
