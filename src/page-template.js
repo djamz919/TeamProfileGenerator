@@ -6,7 +6,7 @@ const generateCards = teamData => {
                 <div class="card" style="max-width: 18rem;">
                     <div class="card-header text-white bg-primary mb-3">
                         <h2 class="card-title">${element.name}</h2>
-                        <h2 class="card-title"><i class="far fa-id-card"></i> Manager</h2>
+                        <h3 class="card-title"><i class="far fa-id-card"></i> Manager</h3>
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">ID: ${element.id}</li>
@@ -20,7 +20,7 @@ const generateCards = teamData => {
                 <div class="card" style="max-width: 18rem;">
                     <div class="card-header text-white bg-success mb-3">
                         <h2 class="card-title">${element.name}</h2>
-                        <h2 class="card-title"><i class="fas fa-user-edit"></i> Engineer</h2>
+                        <h3 class="card-title"><i class="fas fa-user-edit"></i> Engineer</h3>
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">ID: ${element.id}</li>
@@ -34,7 +34,7 @@ const generateCards = teamData => {
             <div class="card" style="max-width: 18rem;">
                 <div class="card-header text-white bg-warning mb-3">
                     <h2 class="card-title">${element.name}</h2>
-                    <h2 class="card-title"><i class="fas fa-user-graduate"></i> Intern</h2>
+                    <h3 class="card-title"><i class="fas fa-user-graduate"></i> Intern</h3>
                 </div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">ID: ${element.id}</li>
@@ -68,19 +68,19 @@ module.exports = templateData => {
     
 <body>
     <header>
-        <div class="container flex-row justify-space-between align-center py-3">
-            <h1 class="page-title text-white text-center bg-secondary py-2 px-3">My Team</h1>
+        <div class="container flex-row justify-space-between align-center text-center">
+            <h1 class="page-title text-white bg-secondary py-2 px-3">My Team</h1>
         </div>
     </header>
     <main class="container my-5">
         <section class="my-3" id="team">
-            <div class="container flex-row justify-space-between align-center">
+            <div class="container flex-row justify-space-around align-center">
                 ${generateCards(templateData)}
             </div>
         </section>
     </main>
-    <footer class="container text-center py-3">
-        <h5 class="text-dark">&copy; ${new Date().getFullYear()}</h5>
+    <footer class="container text-center bg-secondary">
+        <h5 class="text-white">&copy; ${new Date().getFullYear()}</h5>
     </footer>
 </body>
 </html>

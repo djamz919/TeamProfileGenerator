@@ -1,0 +1,91 @@
+* {
+    box-sizing: border-box;
+}
+
+.page-title {
+    text-align: center;
+    width: 100%;
+    margin: 0;
+    font-size: 2.5rem;
+}
+
+.card {
+    margin: 20px 0;
+}
+  
+.container {
+    margin: 0;
+    padding-left: 0;
+    padding-right: 0;
+    max-width: 100%;
+}
+  
+footer {
+    padding: 10px;
+}
+
+#team {
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+/* FLEX CONTENT */
+.flex-row {
+    display: flex;
+    flex-wrap: wrap;
+}
+  
+.flex-column {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+  
+.justify-space-between {
+    justify-content: space-between;
+}
+  
+.justify-space-around {
+    justify-content: space-around;
+}
+  
+.justify-flex-start {
+    justify-content: flex-start;
+}
+  
+.justify-flex-end {
+    justify-content: flex-end;
+}
+  
+.justify-center {
+    justify-content: center;
+}
+  
+.align-stretch {
+    align-items: stretch;
+}
+  
+.align-end {
+    align-items: flex-end;
+}
+  
+.align-center {
+    align-items: center;
+}
+
+  /* FONT UTILS */
+.text-uppercase {
+    text-transform: uppercase;
+}
+  
+.text-center {
+    text-align: center;
+}
+  
+.text-justify {
+    text-align: justify;
+}
+  
+.text-right {
+    text-align: right;
+}

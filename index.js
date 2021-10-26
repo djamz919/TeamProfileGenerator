@@ -69,24 +69,24 @@ const promptManager = teamData => {
                 }
             }
         },
-                {
+        {
             type: 'list',
             name: 'addMember',
             message: "Which type of team member would you like to add?",
             choices: ['Engineer', 'Intern', "I don't want to add any more team members"]
         }
     ])
-    .then(managerData => {
-        const managerInput = new Manager(managerData.name, managerData.id, managerData.email, managerData.office);
-        teamData.push(managerInput);
-        if(managerData.addMember === 'Engineer'){
-            return promptEngineer(teamData);
-        } else if(managerData.addMember === 'Intern'){
-            return promptIntern(teamData);
-        } else {
-            return teamData;
-        }
-    });
+        .then(managerData => {
+            const managerInput = new Manager(managerData.name, managerData.id, managerData.email, managerData.office);
+            teamData.push(managerInput);
+            if (managerData.addMember === 'Engineer') {
+                return promptEngineer(teamData);
+            } else if (managerData.addMember === 'Intern') {
+                return promptIntern(teamData);
+            } else {
+                return teamData;
+            }
+        });
 }
 
 
@@ -144,24 +144,24 @@ const promptEngineer = teamData => {
                 }
             }
         },
-                {
+        {
             type: 'list',
             name: 'addMember',
             message: "Which type of team member would you like to add?",
             choices: ['Engineer', 'Intern', "I don't want to add any more team members"]
         }
     ])
-    .then(engineerData => {
-        const engineerInput = new Engineer(engineerData.name, engineerData.id, engineerData.email, engineerData.github);
-        teamData.push(engineerInput);
-        if(engineerData.addMember === 'Engineer'){
-            return promptEngineer(teamData);
-        } else if(engineerData.addMember === 'Intern'){
-            return promptIntern(teamData);
-        } else {
-            return teamData;
-        }
-    });
+        .then(engineerData => {
+            const engineerInput = new Engineer(engineerData.name, engineerData.id, engineerData.email, engineerData.github);
+            teamData.push(engineerInput);
+            if (engineerData.addMember === 'Engineer') {
+                return promptEngineer(teamData);
+            } else if (engineerData.addMember === 'Intern') {
+                return promptIntern(teamData);
+            } else {
+                return teamData;
+            }
+        });
 }
 
 const promptIntern = teamData => {
@@ -218,24 +218,24 @@ const promptIntern = teamData => {
                 }
             }
         },
-                {
+        {
             type: 'list',
             name: 'addMember',
             message: "Which type of team member would you like to add?",
             choices: ['Engineer', 'Intern', "I don't want to add any more team members"]
         }
     ])
-    .then(internData => {
-        const internInput = new Intern(internData.name, internData.id, internData.email, internData.school);
-        teamData.push(internInput);
-        if(internData.addMember === 'Engineer'){
-            return promptEngineer(teamData);
-        } else if(internData.addMember === 'Intern'){
-            return promptIntern(teamData);
-        } else {
-            return teamData;
-        }
-    });
+        .then(internData => {
+            const internInput = new Intern(internData.name, internData.id, internData.email, internData.school);
+            teamData.push(internInput);
+            if (internData.addMember === 'Engineer') {
+                return promptEngineer(teamData);
+            } else if (internData.addMember === 'Intern') {
+                return promptIntern(teamData);
+            } else {
+                return teamData;
+            }
+        });
 }
 
 function writeToFile(fileName, data) {
@@ -254,18 +254,41 @@ function writeToFile(fileName, data) {
     });
 }
 
-function copyFile () {
+const copyFile = () => {
+    return new Promise((resolve, reject) => {
+        fs.copyFile('./src/style.css', './dist/style.css', err => {
+            if (err) {
+                reject(err);
+                return;
+            }
 
-}
+            resolve({
+                ok: true,
+                message: 'Stylesheet created!'
+            });
+        });
+    });
+};
+
 
 teamData = [];
 
 console.log('Please build your team');
 promptManager(teamData)
     .then(teamData => {
-        console.log(teamData)
+        // console.log(teamData)
         return generateWebsite(teamData);
     })
     .then(pageHTML => {
         return writeToFile('./dist/index.html', pageHTML);
+    })
+    .then(writeFileResponse => {
+        console.log(writeFileResponse);
+        return copyFile();
+    })
+    .then(copyFileResponse => {
+        console.log(copyFileResponse);
+    })
+    .catch(err => {
+        console.log(err);
     });

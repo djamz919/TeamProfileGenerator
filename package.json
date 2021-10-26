@@ -1,0 +1,27 @@
+{
+  "name": "teamprofilegenerator",
+  "version": "1.0.0",
+  "description": "Create an HTML website displaying team profiles from user input",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/djamz919/TeamProfileGenerator.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "inquirer": "^7.0.3",
+    "jest": "^24.9.0"
+  },
+  "bugs": {
+    "url": "https://github.com/djamz919/TeamProfileGenerator/issues"
+  },
+  "homepage": "https://github.com/djamz919/TeamProfileGenerator#readme"
+}
