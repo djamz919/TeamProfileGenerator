@@ -6,21 +6,21 @@ const generateCards = teamData => {
                 <div class="card" style="max-width: 18rem;">
                     <div class="card-header text-white bg-primary mb-3">
                         <h2 class="card-title">${element.name}</h2>
-                        <h2 class="card-title">Manager</h2>
+                        <h2 class="card-title"><i class="far fa-id-card"></i> Manager</h2>
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">ID: ${element.id}</li>
                         <li class="list-group-item">Email: <span><a href="mailto:${element.email}">${element.email}</a></span></li>
-                        <li class="list-group-item">Office Number: ${element.office}</li>
+                        <li class="list-group-item">Office Number: ${element.officeNumber}</li>
                     </ul>
                 </div>
              `
         } else if(element.getRole() === "Engineer"){
             html = html + `
                 <div class="card" style="max-width: 18rem;">
-                    <div class="card-header text-white bg-primary mb-3">
+                    <div class="card-header text-white bg-success mb-3">
                         <h2 class="card-title">${element.name}</h2>
-                        <h2 class="card-title">Engineer</h2>
+                        <h2 class="card-title"><i class="fas fa-user-edit"></i> Engineer</h2>
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">ID: ${element.id}</li>
@@ -32,9 +32,9 @@ const generateCards = teamData => {
         } else if(element.getRole() === "Intern"){
             html = html + `
             <div class="card" style="max-width: 18rem;">
-                <div class="card-header text-white bg-primary mb-3">
+                <div class="card-header text-white bg-warning mb-3">
                     <h2 class="card-title">${element.name}</h2>
-                    <h2 class="card-title">Intern</h2>
+                    <h2 class="card-title"><i class="fas fa-user-graduate"></i> Intern</h2>
                 </div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">ID: ${element.id}</li>
